@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM Plex Sans Arabic">
+    <link rel="stylesheet" href="/css/test.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+    <div class="text-center">
+        <h2>فرم ذخیره اطلاعات آلارمهای موجود در اتاق فرمان</h2>
+        <p class="lead">
+            لطفا اطلاعات مربوط به آلارم را در فیلدهای خالی وارد کرده و سپس آن را ذخیره نمایید.
+        </p>
+    </div>
+    <form action="/alarms/add" method="post" class="row g-3 m-3">
+        <div class="col-md-6">
+          <label for="title" class="form-label">عنوان هشدار</label>
+          <input type="text" class="form-control" id="title" name="title" placeholder="به انگلیسی وارد کنید!">
+        </div>
+        <div class="col-md-2">
+            <label for="section" class="form-label">امور مربوطه</label>
+            <select id="section" name="section" class="form-select" required>
+              <option selected disabled value="">انتخاب کنید...</option>
+              <option name="section" value="الکتریک" id="electric">الکتریک</option>
+              <option name="section" value="بویلر" id="boiler">بویلر</option>
+              <option name="section" value="تجهیزات کمکی" id="mechEquip">تجهیزات کمکی</option>
+              <option name="section" value="توربین" id="turbine">توربین</option>
+              <option name="section" value="مشترک" id="common">مشترک</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="kind" class="form-label">نوع هشدار</label>
+            <div id="kind" name="kind">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="kind" id="inlineRadio1" value="آلارم">
+                    <label class="form-check-label" for="inlineRadio1">آلارم</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="kind" id="inlineRadio2" value="تریپ">
+                    <label class="form-check-label" for="inlineRadio2">تریپ</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <label for="boxNo" class="form-label">شماره باکس</label>
+            <input type="text" class="form-control" id="boxNo" name="boxNo" placeholder="از ۱ تا 100">
+        </div>
+        <div class="col-md-1">
+            <label for="lampNo" class="form-label">شماره لامپ</label>
+            <input type="text" class="form-control" id="lampNo" name="lampNo" placeholder="از ۱ تا 8">
+        </div>
+        <div class="col-md-3">
+            <label for="system" class="form-label">سیستم مربوطه (فانکشن)</label>
+            <input type="text" class="form-control" id="system" name="system" placeholder="به عنوان نمونه AHP">
+        </div>
+        <div class="col-md-3">
+            <label for="device" class="form-label">دستگاه مربوطه</label>
+            <input type="text" class="form-control" id="device" name="device" placeholder="مثال: فیدواتر پمپ">
+        </div>
+        <div class="col-md-3">
+            <label for="sensor" class="form-label">سنسور</label>
+            <input type="text" class="form-control" id="sensor" name="sensor" placeholder="مثال: PSL">
+        </div>
+        <div class="col-md-3">
+            <label for="limit" class="form-label">محدوده تحریک سنسور</label>
+            <input type="text" class="form-control" id="limit" name="limit" placeholder="مثال: کمتر از 10 درجه سانتیگراد">
+        </div>
+        <div class="col-md-6">
+            <label for="causes">دلایل ممکن برای وقوع هشدار</label>
+            <textarea class="form-control form-control-sm" placeholder="به عنوان مثال: عدم خنک کاری" name="causes" id="causes" style="height: 100px"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label for="reqActions">عکس العمل های لازم</label>
+            <textarea class="form-control form-control-sm" placeholder="به عنوان مثال: برقراری مسیر خنک کاری" name="reqActions" id="reqActions" style="height: 100px"></textarea>
+        </div>
+        <div class="d-grid gap-2 d-md-flex">
+            <button class="btn btn-primary  col-md-1" id="save" type="submit">ذخیره اطلاعات</button>
+            <button class="btn btn-primary  col-md-1" type="button" id="clear">پاک کردن فرم</button>
+        </div>
+      </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>

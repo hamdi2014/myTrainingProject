@@ -1,0 +1,44 @@
+:root{
+    --border: #dee2eb;
+}
+
+body, *{
+    font-family: "IBM Plex Sans Arabic", serif;
+}
+
+#body{
+    background-color:rgb(199, 198, 198);
+}
+
+#tblData,h2{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+@media only screen and (max-width:1024px) {
+    table, thead, tbody, th, td, tr{
+        display: block;
+        text-align: center;
+    }
+
+    thead tr{
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr{
+        border: 1px solid var(--border);
+    }
+
+    td{
+        border: none;
+        position: relative;
+    }
+}
+
+#card{
+    /* left: 465px;
+    top: 305px; */
+    transition: opacity 1s ease-out;
+    opacity: 0;
+};

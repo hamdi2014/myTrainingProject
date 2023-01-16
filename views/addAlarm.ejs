@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/alStyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+      select.form-select option:focus {
+        background-color: yellow;
+      }
+    </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Top navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="txtSearch">
+          <button class="btn btn-outline-success" type="submit" id="btnSearch">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+    <!-- END OF HEADER -->
+  <div id="grad" class="">
+    <!-- test -->
+    <div class="card" style="max-width: 900px;" id="frm">
+      <div class="row g-0">
+        <div class="col-md-4 text-center" id="pic-section">
+          <img src="/images/operation.png" class="img-fluid" alt="alarm pic" id="alarm-pic">
+          <h1>Add Alarm</h1>
+        </div>
+        <div class="col-md-8" id="frm-section">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Fill alarm details</h5>
+            <form action="/alarms/add" method="POST" class="row g-3" id="add-form">
+              <div class="col-md-9">
+                <input type="text" class="form-control form-control-sm" name="title" id="title" placeholder="Title">
+              </div>
+              <div class="col-md-3">
+                <select name="kind" id="kind" class="form-select form-select-sm" required>
+                  <option disabled selected value="">Alarm Type</option>
+                  <option value="alarm" id="al">Alarm</option>
+                  <option value="defect" id="df">Defect</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                  <select name="boxNo" id="boxNo" class="form-select form-select-sm" required>
+                      <option selected disabled value="">Box No.</option>
+                  </select>
+              </div>
+              <div class="col-md-3">
+                  <select name="lampNo" id="lampNo" class="form-select form-select-sm" required>
+                    <option selected disabled value="">Lamp No.</option>
+                  </select>
+              </div>
+              <div class="col-md-3">
+                <select name="section" id="section" class="form-select form-select-sm" required>
+                  <option selected disabled value="">Section</option>
+                </select>
+              </div>
+              <div class="col-md-12">
+                <input type="text" class="form-control form-control-sm" name="description" id="description" placeholder="Description">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control form-control-sm" name="system" id="system" placeholder="System">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control form-control-sm" name="device" id="device" placeholder="Device">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control form-control-sm" name="sensor" id="sensor" placeholder="Sensor">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control form-control-sm" name="limit" id="limit" placeholder="Limit">
+              </div>
+              <div class="col-md-6">
+                <textarea class="form-control form-control-sm" placeholder="Possible Causes" name="causes" id="causes" style="height: 100px"></textarea>
+              </div>
+              <div class="col-md-6">
+                <textarea class="form-control form-control-sm" placeholder="Required Actions" name="reqActions" id="reqActions" style="height: 100px"></textarea>
+              </div>
+              <div class="d-grid gap-2 d-md-flex">
+                <button class="btn btn-outline-light col-md-2" id="save" type="submit">Save</button>
+                <button class="btn btn-outline-light me-md-2 col-md-2" type="button" id="clear">Clear</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end of test -->
+  <script src="/js/alarms.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>

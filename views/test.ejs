@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM Plex Sans Arabic">
+    <link rel="stylesheet" href="/css/showAlarm.css">
+</head>
+<body>
+    <div id="frm">
+        <div id="alarm-card-left">
+            <div id="kind">
+                <h1><%=alarm.kind%></h1>
+            </div>
+        </div>
+        <div id="alarm-card-mid">
+            <div>
+                <h3><%=alarm.title%></h3>
+            </div>
+            <div>
+                <p id="description"><%=alarm.description%></p>
+            </div>
+            <hr>
+            <div id="causes">
+                <h4 class="title">دلایل ممکن برای وقوع هشدار:</h4>
+                <p><%=alarm.causes%></p>
+            </div>
+            <div id="reqActions">
+                <h4 class="title">عکس العمل های لازم:</h4>
+                <p><%=alarm.reqActions%></p>
+            </div>
+            <hr>
+            <div class="detail">
+                <p><span class="title">امور مربوطه: </span><%=alarm.section%></p>
+            </div>
+            <div class="detail">
+                <p><span class="title">سیستم مربوطه (فانکشن): </span><%=alarm.system%></p>
+            </div>
+            <div class="detail">
+                <p><span class="title">دستگاه مربوطه: </span><%=alarm.device%></p>
+            </div>
+            <hr>
+            <div class="detail">
+                <p><span class="title">سنسور مربوطه: </span><%=alarm.sensor%></p>
+            </div>
+            <div class="detail">
+                <p><span class="title">محدوده تحریک سنسور: </span><%=alarm.limit%></p>
+            </div>
+        </div>
+        <div id="alarm-card-right">
+            <h3>شماره باکس: <%=alarm.boxNo%></h3>
+            <table id="lampNo">
+                <tr>
+                    <td id="l1">۱</td>
+                    <td id="l2">۲</td>
+                </tr>
+                <tr>
+                    <td id="l3">۳</td>
+                    <td id="l4">۴</td>
+                </tr>
+                <tr>
+                    <td id="l5">۵</td>
+                    <td id="l6">۶</td>
+                </tr>
+                <tr>
+                    <td id="l7">۷</td>
+                    <td id="l8">۸</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        const lampNo = <%-alarm.lampNo%>;
+        const kind = <%-JSON.stringify(alarm.kind)%>;
+        if(kind === "آلارم"){
+            document.getElementById('l'+lampNo).style.backgroundColor = "darkred"
+            document.getElementById('kind').style.backgroundColor = "darkred"
+            document.getElementById('kind').style.color = "white"
+        }else{
+            document.getElementById('l'+lampNo).style.backgroundColor = "orange"
+            document.getElementById('l'+lampNo).style.color = "black"
+            document.getElementById('kind').style.backgroundColor = "orange"
+        }
+        
+        console.log(lampNo);
+    </script>
+</body>
+</html>

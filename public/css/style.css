@@ -1,0 +1,63 @@
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(151deg, #020202e0, #0058839e);
+}
+
+img {
+    width: 150px;
+    height: 200px;
+    background-color: #4dd0e1;
+}
+
+.card {
+    width: 250px;
+}
+
+img:hover{
+    cursor: pointer;
+}
+
+.main {
+    display: flex;
+    flex-flow: row wrap;
+    padding: .5rem;
+}
+
+.container {
+    flex: 0 1 20rem;
+    margin: .5rem;
+}
+
+#header{
+    height: 125px;
+    line-height: 40px;
+}
+@media (min-width: 600px) {
+    #header{
+        height: 120px;
+        line-height: 40px;
+        padding-top: 18px;
+    }
+}
+
+@media (min-width: 934px){
+    #header{
+        height: 64px;
+        padding: 0;
+        line-height: 64px;
+    }
+}
+
+#aux {
+    font-size: 20px;
+}
+
+.material-icons:hover{
+    background-color: green;
+}

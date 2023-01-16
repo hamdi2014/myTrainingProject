@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM Plex Sans Arabic">
+    <link rel="stylesheet" href="/css/allAlarmsStyle.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body id="body">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Top navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">خانه</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+            </ul>
+            <form method="post" action="/alarms" class="d-flex" role="search" id="frm-search">
+              <input type="text" id="search-section" name="section" class="d-none" <%if(section){%> value="<%=section%>"<%}%>>
+              <input class="form-control me-2" type="search" placeholder="جستجو" aria-label="Search" name="search" id="search">
+              <button class="btn btn-outline-success" type="submit" id="btn-search">جستجو</button>
+            </form>
+          </div>
+        </div>
+    </nav>
+    <%if(section){%>
+      <h2><%=section%> آلارمهای</h2>
+    <%}else{%>
+      <h2>تمام آلارمها</h2>
+    <%}%>
+    <div id="tblData">
+      <table class="table shadow-lg">
+        <thead>
+          <tr class="text-bg-dark">
+            <th scope="col">#</th>
+            <th scope="col">عنوان هشدار</th>
+            <th scope="col">نوع هشدار</th>
+            <th scope="col">شماره باکس</th>
+            <th scope="col">شماره لامپ</th>
+            <th scope="col">امور مربوطه</th>
+            <th scope="col">سیستم مربوطه (فانکشن)</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="tblAlarms" class="ju">
+          <%for(let i=0;i<=alarms.length-1;i++){%>
+            <% if(alarms[i].kind==="آلارم"){ %>
+              <tr class="table-danger">
+            <% } else{ %>  
+              <tr class="table-warning" id="r<%=i%>">
+            <% } %>
+              <th scope="col"><%=i+1%></th>
+              <td scope="col"><%=alarms[i].title%></td>
+              <td scope="col"><%=alarms[i].kind%></td>
+              <td scope="col"><%=alarms[i].boxNo%></td>
+              <td scope="col"><%=alarms[i].lampNo%></td>
+              <td scope="col"><%=alarms[i].section%></td>
+              <td scope="col"><%=alarms[i].system%></td>
+              <td scope="col" style="display: none;"><%=alarms[i].device%></td>
+              <td scope="col" style="display: none;"><%=alarms[i].sensor%></td>
+              <td scope="col" style="display: none;"><%=alarms[i].limit%></td>
+              <td scope="col" style="display: none;"><%=alarms[i].causes%></td>
+              <td scope="col" style="display: none;"><%=alarms[i].reqActions%></td>
+              <td scope="col">
+                <a class="fs-3" href="/alarms/show-details?id=<%=alarms[i]._id%>" role="button" id="<%=i%>"><i class="bi bi-info-square"></i></a>
+                <a class="fs-3" href="/alarms/update?_id=<%=alarms[i]._id%>" role="button"><i class="bi bi-pencil-square ms-2 me-1 text-success"></i></a>
+                <a class="fs-3" href="/alarms/del?_id=<%=alarms[i]._id%>" role="button"><i class="bi bi-trash text-danger"></i></a>
+              </td>
+              <!-- <td scope="col"></td>
+              <td scope="col"></td> -->
+            </tr>
+          <%}%>
+        </tbody>
+      </table>
+      
+      <% if (pages > 0) { %>
+        <ul class="pagination justify-content-center">
+            <% if (current == 1) { %>
+                <li class="page-item disabled"><a class="page-link">First</a></li>
+            <% } else { %>
+                <li class="page-item"><a class="page-link" href="/alarms?page=<%=1%>">First</a></li>
+            <% } %>
+            <% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
+                <li class="page-item disabled"><a class="page-link">...</a></li>
+            <% } %>
+            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                <% if (i == current) { %>
+                    <li class="active page-item"><a class="page-link"><%= i %></a></li>
+                <% } else { %>
+                    <li class="page-item"><a class="page-link" href="/alarms?page=<%=i%>"><%= i %></a></li>
+                <% } %>
+                <% if (i == Number(current) + 4 && i < pages) { %>
+                    <li class="disabled page-item"><a class="page-link">...</a></li>
+                <% } %>
+            <% } %>
+            <% if (Number(current) === pages) { %>
+                <li class="disabled page-item"><a class="page-link">Last</a></li>
+            <% } else { %>
+                <li class="page-item"><a class="page-link" href="/alarms?page=<%=pages%>">Last</a></li>
+            <% } %>
+        </ul>
+    <% } %>
+
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="alarmDetails" tabindex="-1" aria-labelledby="alarmDetailsLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="alarmDetailsLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card w-25 shadow bg-warning" id="card">
+      <div class="card-header" id="cardHeader">
+        Featured
+      </div>
+      <div class="card-body">
+        <h4 class="card-title" id="title"></h4>
+        <p class="card-text" id="description"></p>
+        <h6>Causes:</h6>
+        <p class="card-text" id="causes"></p>
+        <h6>Required actions:</h6>
+        <p class="card-text" id="causes"></p>
+        <a href="#" class="btn btn-primary" id="close"><i class="bi bi-1-square-fill"></i>Close</a>
+      </div>
+      <div class="card-footer" id="cardFooter"></div>
+    </div>
+    <script>
+      const getSection = <%- JSON.stringify(section) %>
+      console.log(getSection);
+    </script>
+    <script src="/js/allAlarms.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
